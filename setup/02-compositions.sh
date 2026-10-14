@@ -121,9 +121,16 @@ elif [ "$HYPERSCALER" = "aws" ]; then
     AWS_ACCOUNT_ID=$(gum input --placeholder "AWS Account ID" --value "$AWS_ACCOUNT_ID")
     echo "export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID" >> .env
 
+    # Only needed for temporary credentials (key IDs starting with ASIA)
+    AWS_SESSION_TOKEN=$(gum input \
+        --placeholder "AWS Session Token (leave empty for AKIA keys)" \
+        --value "$AWS_SESSION_TOKEN" --password)
+    echo "export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN" >> .env
+
     echo "[default]
 aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
+${AWS_SESSION_TOKEN:+aws_session_token = $AWS_SESSION_TOKEN}
 " >aws-creds.conf
 
     kubectl --namespace crossplane-system \
