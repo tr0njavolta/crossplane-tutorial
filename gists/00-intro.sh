@@ -46,11 +46,6 @@ git push
 
 # Open http://argocd.127.0.0.1.nip.io in a browser.
 
-kubectl --namespace a-team get \
-    clusters.devopstoolkit.ai,sqls.devopstoolkit.live,apps.devopstoolkit.live
-
-kubectl --namespace a-team get managed
-
 crossplane resource trace clusters.devopstoolkit.ai cluster-01 \
     --namespace a-team
 
