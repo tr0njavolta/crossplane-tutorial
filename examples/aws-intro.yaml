@@ -31,7 +31,7 @@ spec:
   size: small
   region: us-east-1
   databases:
-    - silly-demo-db
+    - sillydemodb
   crossplane:
     compositionSelector:
       matchLabels:
@@ -76,7 +76,7 @@ spec:
   targetNamespace: production
   db:
     secret: silly-demo-db
-    name: silly-demo-db
+    name: sillydemodb
   crossplane:
     compositionSelector:
       matchLabels:
