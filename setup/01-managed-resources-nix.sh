@@ -93,7 +93,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
     # Only needed for temporary credentials (key IDs starting with ASIA)
     AWS_SESSION_TOKEN=$(gum input \
         --placeholder "AWS Session Token (leave empty for AKIA keys)" \
-        --value "$AWS_SESSION_TOKEN" --password)
+        --value "$AWS_SESSION_TOKEN" --password --char-limit 0)
     echo "export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN" >> .env
 
     echo "[default]
@@ -101,6 +101,7 @@ aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
 ${AWS_SESSION_TOKEN:+aws_session_token = $AWS_SESSION_TOKEN}
 " >aws-creds.conf
+
 
 else
 
