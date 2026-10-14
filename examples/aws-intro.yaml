@@ -27,7 +27,7 @@ kind: SQL
 metadata:
   name: silly-demo-db
 spec:
-  version: "16.3"
+  version: "16.15"
   size: small
   region: us-east-1
   databases:
