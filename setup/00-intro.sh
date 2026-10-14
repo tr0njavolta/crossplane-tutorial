@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 gum style \
@@ -53,7 +53,8 @@ kubectl apply \
 
 helm upgrade --install crossplane crossplane \
     --repo https://charts.crossplane.io/stable \
-    --namespace crossplane-system --create-namespace --wait
+    --namespace crossplane-system --create-namespace \
+    --version 2.4.2 --wait
 
 kubectl apply \
     --filename providers/provider-kubernetes-incluster.yaml
@@ -123,8 +124,8 @@ if [[ "$HYPERSCALER" == "google" ]]; then
         --from-file creds=./gcp-creds.json
 
     echo "
-apiVersion: gcp.upbound.io/v1beta1
-kind: ProviderConfig
+apiVersion: gcp.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
 metadata:
   name: default
 spec:
@@ -174,62 +175,13 @@ else
 
     DB_NAME=silly-demo-db-$(date +%Y%m%d%H%M%S)
 
-    echo "---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: ClusterClaim
-metadata:
-  name: cluster-01
-spec:
-  id: cluster01
-  compositionSelector:
-    matchLabels:
-      provider: azure
-      cluster: aks
-  parameters:
-    nodeSize: small
-    minNodeCount: 3
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: $DB_NAME-password
-data:
-  password: SVdpbGxOZXZlclRlbGxAMQ==
----
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: SQLClaim
-metadata:
-  name: silly-demo-db
-spec:
-  id: $DB_NAME
-  compositionSelector:
-    matchLabels:
-      provider: azure
-      db: postgresql
-  parameters:
-    version: \"11\"
-    size: small
----
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: AppClaim
-metadata:
-  name: silly-demo
-spec:
-  id: silly-demo
-  compositionSelector:
-    matchLabels:
-      type: backend-db
-      location: remote
-  parameters:
-    namespace: production
-    image: c8n.io/vfarcic/silly-demo:1.4.52
-    port: 8080
-    host: silly-demo.acme.com
-    dbSecret:
-      name: silly-demo-db
-      namespace: a-team
-    kubernetesProviderConfigName: cluster01" \
-    | tee examples/azure-intro.yaml
+    # Azure server names are global, so give the DB a unique name
+    export DB_NAME
+    yq --inplace '
+      (select(.kind == "SQL") | .metadata.name) = env(DB_NAME) |
+      (select(.kind == "Secret") | .metadata.name) = env(DB_NAME) + "-password" |
+      (select(.kind == "Object") | .spec.references[0].patchesFrom.name) = env(DB_NAME)
+    ' examples/azure-intro.yaml
 
 fi
 

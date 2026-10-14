@@ -7,3 +7,5 @@
 /azure-creds.json
 /bin
 /kubeconfig.yaml
+.DS_Store
+book

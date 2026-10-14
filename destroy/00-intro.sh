@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 gum style \
@@ -45,13 +45,13 @@ git commit -m "Remove intro"
 
 git push
 
-COUNTER=$(kubectl get managed --no-headers | grep -v database \
+COUNTER=$(kubectl get managed --all-namespaces --no-headers | grep -v database \
 	| grep -v object | grep -v release | wc -l)
 
 while [ $COUNTER -ne 0 ]; do
 	echo "$COUNTER resources still exist. Waiting for them to be deleted..."
 	sleep 30
-	COUNTER=$(kubectl get managed --no-headers \
+	COUNTER=$(kubectl get managed --all-namespaces --no-headers \
 		| grep -v database | grep -v object | grep -v release \
 		| wc -l)
 done

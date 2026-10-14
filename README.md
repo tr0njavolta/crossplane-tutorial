@@ -7,27 +7,27 @@ Full playlist: <https://youtube.com/playlist?list=PLyicRj904Z99i8U5JaNW5X3AyBvfQ
 ### Part 1
 
 - Video: <https://youtu.be/bBpE0rfE-JM?si=o-1r9U_60mbPlOp5>
-- Gist: <https://gist.github.com/vfarcic/732bf76feb51489add89567433019460>
+- Commands: [gists/00-intro.sh](gists/00-intro.sh)
 
 ### Part 2
 
 - Video: <https://youtu.be/o53_7vuWjw4?si=D7adBi7b-SFLoNmu>
-- Gist: <https://gist.github.com/vfarcic/aa5ecfa315608d1257ba56df18088f2f>
+- Commands: [gists/01-managed-resources.sh](gists/01-managed-resources.sh)
 
 ### Part 3
 
 - Video: <https://youtu.be/X7E6YfXWgvE?si=04-MKY0pqCQIrBJl>
-- Gist: <https://gist.github.com/vfarcic/08162d1f3f4954c1f420fae59704b629>
+- Commands: [gists/02-compositions.sh](gists/02-compositions.sh)
 
 ### Part 4
 
 - Video: <https://youtu.be/ompdPvaHn0U?si=A_7GAZTRdFNN01A8>
-- Gist: <https://gist.github.com/vfarcic/3f4f9bf05c937b9f12e6bcb43f3c0bc7>
+- Commands: [gists/03-configurations.sh](gists/03-configurations.sh)
 
 ### Part 5
 
 - Video: <https://www.youtube.com/watch?v=XSzKs97Ls4g>
-- Gist: <https://gist.github.com/vfarcic/9ae7abe89ebab199aa6e52a364e01edc>
+- Commands: [gists/04-functions.sh](gists/04-functions.sh)
 
 ## Resources
 

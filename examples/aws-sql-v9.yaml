@@ -6,8 +6,8 @@ metadata:
 data:
   password: cG9zdGdyZXM=
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: SQLClaim
+apiVersion: devopstoolkit.live/v1alpha1
+kind: SQL
 metadata:
   name: my-db
   annotations:
@@ -15,10 +15,11 @@ metadata:
     author: Viktor Farcic <viktor@farcic.com>
 spec:
   id: my-db
-  compositionSelector:
-    matchLabels:
-      provider: aws
-      db: postgresql
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        provider: aws
+        db: postgresql
   parameters:
     version: "13"
     size: small

@@ -1,14 +1,14 @@
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: ClusterClaim
+apiVersion: devopstoolkit.ai/v2
+kind: Cluster
 metadata:
   name: cluster-01
 spec:
-  id: cluster-01
-  compositionSelector:
-    matchLabels:
-      provider: google
-      cluster: gke
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        provider: google
+        cluster: gke
   parameters:
     nodeSize: small
     minNodeCount: 1

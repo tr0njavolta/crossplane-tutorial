@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 gum style \
@@ -41,13 +41,13 @@ else
 	kubectl --namespace a-team delete \
 		--filename examples/$HYPERSCALER-sql-v10.yaml
 
-	COUNTER=$(kubectl get managed --no-headers | grep -v database \
+	COUNTER=$(kubectl get managed --all-namespaces --no-headers | grep -v database \
 		| wc -l)
 
 	while [ $COUNTER -ne 0 ]; do
 		echo "$COUNTER resources still exist. Waiting for them to be deleted..."
 		sleep 30
-		COUNTER=$(kubectl get managed --no-headers \
+		COUNTER=$(kubectl get managed --all-namespaces --no-headers \
 			| grep -v database | wc -l)
 	done
 

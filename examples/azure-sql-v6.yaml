@@ -6,8 +6,8 @@ metadata:
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: SQLClaim
+apiVersion: devopstoolkit.live/v1alpha1
+kind: SQL
 metadata:
   name: my-db
   annotations:
@@ -15,10 +15,11 @@ metadata:
     author: Viktor Farcic <viktor@farcic.com>
 spec:
   id: my-db-20240115000551
-  compositionSelector:
-    matchLabels:
-      provider: azure
-      db: postgresql
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        provider: azure
+        db: postgresql
   parameters:
     version: "11"
     size: small

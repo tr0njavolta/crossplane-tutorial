@@ -1,57 +1,83 @@
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: ClusterClaim
+apiVersion: devopstoolkit.ai/v2
+kind: Cluster
 metadata:
   name: cluster-01
 spec:
-  id: cluster-01
-  compositionSelector:
-    matchLabels:
-      provider: aws
-      cluster: eks
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        provider: aws
+        cluster: eks
   parameters:
     nodeSize: small
     minNodeCount: 3
+    namespaces:
+    - production
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: silly-demo-db-password
+  name: -password
 data:
   password: cG9zdGdyZXM=
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: SQLClaim
+apiVersion: devopstoolkit.live/v1beta1
+kind: SQL
 metadata:
-  name: silly-demo-db
+  name: 
 spec:
-  id: silly-demo-db
-  compositionSelector:
-    matchLabels:
-      provider: aws
-      db: postgresql
-  parameters:
-    version: "13"
-    size: small
-    databases:
-      - silly-demo-db
+  version: "16.3"
+  size: small
+  region: us-east-1
+  databases:
+  - silly-demo-db
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        provider: aws
+        db: postgresql
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: AppClaim
+# Copies the DB connection Secret into the new cluster so the app can use it
+apiVersion: kubernetes.m.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: silly-demo-db-secret
+spec:
+  providerConfigRef:
+    kind: ProviderConfig
+    name: cluster-01
+  references:
+  - patchesFrom:
+      apiVersion: v1
+      kind: Secret
+      name: 
+      namespace: a-team
+      fieldPath: data
+    toFieldPath: data
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: silly-demo-db
+        namespace: production
+---
+apiVersion: devopstoolkit.live/v1beta1
+kind: App
 metadata:
   name: silly-demo
 spec:
-  id: silly-demo
-  compositionSelector:
-    matchLabels:
-      type: backend-db
-      location: remote
-  parameters:
-    namespace: production
-    image: c8n.io/vfarcic/silly-demo:1.4.52
-    port: 8080
-    host: silly-demo.acme.com
-    dbSecret:
-      name: silly-demo-db
-      namespace: a-team
-    kubernetesProviderConfigName: cluster-01
+  image: c8n.io/vfarcic/silly-demo
+  tag: "1.4.52"
+  port: 8080
+  host: silly-demo.acme.com
+  providerConfigName: cluster-01
+  targetNamespace: production
+  db:
+    secret: silly-demo-db
+    name: silly-demo-db
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        type: backend

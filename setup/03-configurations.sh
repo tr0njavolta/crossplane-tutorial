@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 gum style \
@@ -61,7 +61,8 @@ kubectl create namespace a-team
 
 helm upgrade --install crossplane crossplane \
     --repo https://charts.crossplane.io/stable \
-    --namespace crossplane-system --create-namespace --wait
+    --namespace crossplane-system --create-namespace \
+    --version 2.4.2 --wait
 
 echo "## Which Hyperscaler do you want to use?" | gum format
 
@@ -162,8 +163,8 @@ metadata:
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: SQLClaim
+apiVersion: devopstoolkit.live/v1alpha1
+kind: SQL
 metadata:
   name: my-db
   annotations:
@@ -171,10 +172,11 @@ metadata:
     author: Viktor Farcic <viktor@farcic.com>
 spec:
   id: $DB_NAME
-  compositionSelector:
-    matchLabels:
-      provider: azure
-      db: postgresql
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        provider: azure
+        db: postgresql
   parameters:
     version: \"11\"
     size: small" \
@@ -188,8 +190,8 @@ metadata:
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=
 ---
-apiVersion: devopstoolkitseries.com/v1alpha1
-kind: SQLClaim
+apiVersion: devopstoolkit.live/v1alpha1
+kind: SQL
 metadata:
   name: my-db
   annotations:
@@ -197,10 +199,11 @@ metadata:
     author: Viktor Farcic <viktor@farcic.com>
 spec:
   id: $DB_NAME
-  compositionSelector:
-    matchLabels:
-      provider: azure
-      db: postgresql
+  crossplane:
+    compositionSelector:
+      matchLabels:
+        provider: azure
+        db: postgresql
   parameters:
     version: \"11\"
     size: small" \

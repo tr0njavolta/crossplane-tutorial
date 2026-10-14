@@ -4,25 +4,25 @@ kind: Provider
 metadata:
   name: provider-aws-ec2
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws-ec2:v1.0.0
+  package: xpkg.crossplane.io/crossplane-contrib/provider-aws-ec2:v2.9.0
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-aws-rds
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws-rds:v1.0.0
+  package: xpkg.crossplane.io/crossplane-contrib/provider-aws-rds:v2.9.0
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-gcp-sql
 spec:
-  package: xpkg.upbound.io/upbound/provider-gcp-sql:v0.41.0
+  package: xpkg.crossplane.io/crossplane-contrib/provider-gcp-sql:v3.1.0
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-azure-dbforpostgresql
 spec:
-  package: xpkg.upbound.io/upbound/provider-azure-dbforpostgresql:v0.40.0
+  package: xpkg.crossplane.io/crossplane-contrib/provider-azure-dbforpostgresql:v2.8.0
