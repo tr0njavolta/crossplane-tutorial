@@ -17,7 +17,6 @@
 
 # Install GitHub CLI by following the instructions at https://github.com/cli/cli?tab=readme-ov-file#installation
 
-gh repo fork tr0njavolta/crossplane-tutorial --clone --remote
 
 cd crossplane-tutorial
 

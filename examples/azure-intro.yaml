@@ -13,25 +13,25 @@ spec:
     nodeSize: small
     minNodeCount: 3
     namespaces:
-    - production
+      - production
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: -password
+  name: silly-demo-db-password
 data:
   password: cG9zdGdyZXM=
 ---
 apiVersion: devopstoolkit.live/v1beta1
 kind: SQL
 metadata:
-  name: 
+  name: silly-demo-db
 spec:
   version: "11"
   size: small
   region: eastus
   databases:
-  - silly-demo-db
+    - silly-demo-db
   crossplane:
     compositionSelector:
       matchLabels:
@@ -48,13 +48,13 @@ spec:
     kind: ProviderConfig
     name: cluster-01
   references:
-  - patchesFrom:
-      apiVersion: v1
-      kind: Secret
-      name: 
-      namespace: a-team
-      fieldPath: data
-    toFieldPath: data
+    - patchesFrom:
+        apiVersion: v1
+        kind: Secret
+        name: silly-demo-db
+        namespace: a-team
+        fieldPath: data
+      toFieldPath: data
   forProvider:
     manifest:
       apiVersion: v1

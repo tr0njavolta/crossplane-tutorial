@@ -61,6 +61,8 @@ kubectl apply \
 
 kubectl apply --filename providers/provider-helm-incluster.yaml
 
+kubectl apply --filename providers/provider-families.yaml
+
 kubectl apply --filename providers/dot-kubernetes.yaml
 
 kubectl apply --filename providers/dot-sql.yaml
@@ -72,6 +74,10 @@ gum spin --spinner dot \
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
     --all --timeout=1800s
+
+kubectl wait --for=condition=healthy \
+    configuration.pkg.crossplane.io,function.pkg.crossplane.io \
+    --all --timeout=600s
 
 echo "## Which Hyperscaler do you want to use?" | gum format
 
