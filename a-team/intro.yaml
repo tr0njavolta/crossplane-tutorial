@@ -42,7 +42,7 @@ spec:
 apiVersion: kubernetes.m.crossplane.io/v1alpha1
 kind: Object
 metadata:
-  name: silly-demo-db-secret
+  name: silly-demo-db-remote-secret
 spec:
   providerConfigRef:
     kind: ProviderConfig
