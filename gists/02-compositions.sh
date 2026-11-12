@@ -47,6 +47,8 @@ kubectl get managed
 
 kubectl get compositions
 
+kubectl delete --filename examples/sql-v1.yaml
+
 #########################
 # Defining Compositions #
 #########################
