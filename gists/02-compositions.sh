@@ -131,8 +131,6 @@ kubectl apply --filename compositions/sql-v4
 
 kubectl get secrets
 
-kubectl get secrets
-
 # Locate the secret with the name that starts with `my-db-` and has a timestamp suffix if you are using **Azure**, copy it, and use it as the value in the command that follows.
 export DB=my-db
 
@@ -212,9 +210,7 @@ kubectl patch databases.postgresql.sql.m.crossplane.io $DB \
 
 cat compositions/sql-v5/definition.yaml
 
-cat compositions/sql-v6/$HYPERSCALER.yaml
-
-kubectl apply --filename compositions/sql-v6
+cat compositions/sql-v5/$HYPERSCALER.yaml
 
 cat examples/$HYPERSCALER-sql-v6.yaml
 
