@@ -61,6 +61,7 @@ spec:
           transforms:
             - type: string
               string:
+                type: Format
                 fmt: "%s-a"
       - name: subnet-b
         base:
@@ -84,6 +85,7 @@ spec:
           transforms:
             - type: string
               string:
+                type: Format
                 fmt: "%s-b"
       - name: subnet-c
         base:
@@ -107,6 +109,7 @@ spec:
           transforms:
             - type: string
               string:
+                type: Format
                 fmt: "%s-c"
       - name: subnetgroup
         base:
@@ -195,6 +198,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: '%s-1a'
       - name: routeTableAssociation1b
         base:
@@ -217,6 +221,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: '%s-1b'
       - name: routeTableAssociation1c
         base:
@@ -239,6 +244,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: '%s-1c'
       - name: securityGroup
         base:
@@ -310,4 +316,5 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-password"

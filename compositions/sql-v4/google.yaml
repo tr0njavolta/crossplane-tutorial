@@ -54,6 +54,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: POSTGRES_%s
         - fromFieldPath: spec.parameters.size
           toFieldPath: spec.forProvider.settings.tier
@@ -70,6 +71,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-password"
       - name: user
         base:
@@ -89,4 +91,5 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-password"

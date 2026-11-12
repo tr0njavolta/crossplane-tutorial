@@ -54,6 +54,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: POSTGRES_%s
         - fromFieldPath: spec.parameters.size
           toFieldPath: spec.forProvider.settings.tier
@@ -68,6 +69,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-password"
       - name: user
         base:
@@ -87,6 +89,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-password"
       - name: sql-config
         base:
@@ -133,6 +136,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-sql"
         readinessChecks:
         - type: None
@@ -177,6 +181,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-password"
         - fromFieldPath: spec.id
           toFieldPath: spec.references[2].patchesFrom.name
@@ -187,6 +192,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-sql"
         - fromFieldPath: metadata.namespace
           toFieldPath: spec.references[0].patchesFrom.namespace

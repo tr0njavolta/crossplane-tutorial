@@ -71,6 +71,7 @@ spec:
           transforms:
           - type: string
             string:
+              type: Format
               fmt: "%s-password"
       - name: firewall-rule
         base:

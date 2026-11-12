@@ -35,7 +35,7 @@ kubectl get xrds
 
 kubectl get crds | grep sql
 
-kubectl explain sqls.devopstoolkitseries.com --recursive
+kubectl explain sqls.devopstoolkit.live --recursive
 
 cat examples/sql-v1.yaml
 
@@ -75,9 +75,9 @@ cat examples/$HYPERSCALER-sql-v1.yaml
 
 kubectl apply --filename examples/$HYPERSCALER-sql-v1.yaml
 
-crossplane beta trace sql my-db
+crossplane resource trace sql my-db
 
-crossplane beta trace sql my-db
+crossplane resource trace sql my-db
 
 #####################################
 # Resource References and Selectors #
@@ -111,7 +111,7 @@ cat examples/$HYPERSCALER-sql-v3.yaml
 
 kubectl apply --filename examples/$HYPERSCALER-sql-v3.yaml
 
-crossplane beta trace sql my-db
+crossplane resource trace sql my-db
 
 # Replace `[...]` with the full name of the one the Managed Resources.
 
@@ -127,27 +127,27 @@ cat compositions/sql-v4/$HYPERSCALER.yaml
 
 kubectl apply --filename compositions/sql-v4
 
-kubectl --namespace crossplane-system get secrets
+kubectl get secrets
 
-kubectl --namespace crossplane-system get secrets
+kubectl get secrets
 
 # Locate the secret with the name that starts with `my-db-` and has a timestamp suffix if you are using **Azure**, copy it, and use it as the value in the command that follows.
 export DB=my-db
 
-kubectl --namespace crossplane-system get secret $DB \
+kubectl get secret $DB \
     --output yaml
 
 #######################################
 # Combining Providers in Compositions #
 #######################################
 
-export PGUSER=$(kubectl --namespace crossplane-system \
+export PGUSER=$(kubectl \
     get secret $DB --output jsonpath="{.data.username}" \
     | base64 -d)
 
 export PGUSER=postgres
 
-export PGPASSWORD=$(kubectl --namespace crossplane-system \
+export PGPASSWORD=$(kubectl \
     get secret $DB --output jsonpath="{.data.password}" \
     | base64 -d)
 
@@ -157,7 +157,7 @@ export HOST_KEY=host
 
 export HOST_KEY=publicIP
 
-export PGHOST=$(kubectl --namespace crossplane-system \
+export PGHOST=$(kubectl \
     get secret $DB --output jsonpath="{.data.$HOST_KEY}" \
     | base64 -d)
 
@@ -201,12 +201,12 @@ kubectl delete --filename examples/$HYPERSCALER-sql-v3.yaml
 
 kubectl get managed
 
-kubectl patch database.postgresql.sql.crossplane.io $DB \
+kubectl patch databases.postgresql.sql.m.crossplane.io $DB \
     --patch '{"metadata":{"finalizers":[]}}' --type=merge
 
-#############################
-# Defining Composite Claims #
-#############################
+####################################
+# Namespaced Composite Resources   #
+####################################
 
 cat compositions/sql-v5/definition.yaml
 
@@ -219,9 +219,9 @@ cat examples/$HYPERSCALER-sql-v6.yaml
 kubectl --namespace a-team apply \
     --filename examples/$HYPERSCALER-sql-v6.yaml
 
-kubectl --namespace a-team get sqlclaims
+kubectl --namespace a-team get sqls
 
-crossplane beta trace sqlclaim my-db --namespace a-team
+crossplane resource trace sql my-db --namespace a-team
 
 kubectl --namespace a-team get secrets
 

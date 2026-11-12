@@ -38,8 +38,8 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
 else
 
-	kubectl --namespace a-team delete \
-		--filename examples/$HYPERSCALER-sql-v6.yaml
+	kubectl delete sqls.devopstoolkit.live --all --all-namespaces \
+		--ignore-not-found 2>/dev/null || true
 
 	COUNTER=$(kubectl get managed --all-namespaces --no-headers | grep -v database \
 		| wc -l)

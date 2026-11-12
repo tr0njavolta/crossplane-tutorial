@@ -23,7 +23,8 @@ source .env
 
 helm upgrade --install crossplane crossplane \
     --repo https://charts.crossplane.io/stable \
-    --namespace crossplane-system --create-namespace --wait
+    --namespace crossplane-system --create-namespace \
+    --version 2.4.3 --wait
 
 ########################
 # Crossplane Providers #
@@ -38,6 +39,8 @@ kubectl get pkgrev
 kubectl get pkgrev
 
 kubectl get crds
+
+kubectl get managedresourcedefinitions
 
 # Execute the command that follows only if you are using **AWS**.
 
