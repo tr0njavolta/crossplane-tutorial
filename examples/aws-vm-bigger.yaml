@@ -1,5 +1,5 @@
 ---
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Instance
 metadata:
   name: my-vm
@@ -13,7 +13,7 @@ spec:
     tags:
       Name: my-vm
 ---
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: InstanceState
 metadata:
   name: my-vm
@@ -24,7 +24,7 @@ spec:
       name: my-vm
     state: running
 ---
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: my-vm
@@ -34,7 +34,7 @@ spec:
     cidrBlock: 10.0.0.0/16
     enableDnsSupport: true
 ---
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: my-vm
