@@ -38,19 +38,14 @@ crossplane xpkg build
 
 ls -1
 
-# Open https://accounts.upbound.io in a browser and create an account if you do not have it already.
+# Open https://hub.docker.com in a browser and create an account if you do not have it already.
 
-up repository create dot-sql
+docker login
 
-# Open https://marketplace.upbound.io in a browser, open the user in the top-right corner of the screen, and choose which account you'd like to manage.
+# Replace `[...]` with your Docker Hub username
+export REGISTRY_USER=[...]
 
-# Replace `[...]` with the username
-
-export UP_USER=[...]
-
-crossplane xpkg login --username $UP_USER
-
-crossplane xpkg push xpkg.upbound.io/$UP_USER/dot-sql:v0.0.7
+crossplane xpkg push index.docker.io/$REGISTRY_USER/dot-sql:v0.0.7
 
 rm dot-sql-*.xpkg
 
@@ -63,7 +58,7 @@ cd ../..
 cat providers/dot-sql-v7.yaml
 
 yq --inplace \
-    ".spec.package = \"xpkg.upbound.io/$UP_USER/dot-sql:v0.0.7\"" \
+    ".spec.package = \"index.docker.io/$REGISTRY_USER/dot-sql:v0.0.7\"" \
     providers/dot-sql-v7.yaml
 
 kubectl apply --filename providers/dot-sql-v7.yaml
@@ -82,7 +77,7 @@ kubectl apply \
 kubectl --namespace a-team apply \
     --filename examples/$HYPERSCALER-sql-v6.yaml
 
-crossplane beta trace sqlclaim my-db --namespace a-team
+crossplane resource trace sql my-db --namespace a-team
 
 ######################
 # Destroy Everything #

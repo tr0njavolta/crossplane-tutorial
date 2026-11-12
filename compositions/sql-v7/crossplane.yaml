@@ -12,17 +12,31 @@ spec:
   crossplane:
     version: ">=v2.0.0"
   dependsOn:
-  - provider: xpkg.crossplane.io/crossplane-contrib/provider-aws-ec2
-    version: ">=v2.9.0"
-  - provider: xpkg.crossplane.io/crossplane-contrib/provider-aws-rds
-    version: ">=v2.9.0"
-  - provider: xpkg.crossplane.io/crossplane-contrib/provider-azure-dbforpostgresql
-    version: ">=v2.8.0"
-  - provider: xpkg.crossplane.io/crossplane-contrib/provider-gcp-sql
-    version: ">=v3.1.0"
-  - provider: xpkg.crossplane.io/crossplane-contrib/provider-sql
-    version: ">=v0.16.2"
-  - function: xpkg.crossplane.io/crossplane-contrib/function-patch-and-transform
-    version: ">=v0.11.0"
-  # - provider: xpkg.crossplane.io/crossplane-contrib/provider-kubernetes
-  #   version: ">=v1.4.1"
+    - apiVersion: pkg.crossplane.io/v1
+      kind: Provider
+      package: xpkg.crossplane.io/crossplane-contrib/provider-aws-ec2
+      version: ">=v2.9.0"
+    - apiVersion: pkg.crossplane.io/v1
+      kind: Provider
+      package: xpkg.crossplane.io/crossplane-contrib/provider-aws-rds
+      version: ">=v2.9.0"
+    - apiVersion: pkg.crossplane.io/v1
+      kind: Provider
+      package: xpkg.crossplane.io/crossplane-contrib/provider-azure-dbforpostgresql
+      version: ">=v2.8.0"
+    - apiVersion: pkg.crossplane.io/v1
+      kind: Provider
+      package: xpkg.crossplane.io/crossplane-contrib/provider-gcp-sql
+      version: ">=v3.1.0"
+    - apiVersion: pkg.crossplane.io/v1
+      kind: Provider
+      package: xpkg.crossplane.io/crossplane-contrib/provider-sql
+      version: ">=v0.16.2"
+    - apiVersion: pkg.crossplane.io/v1
+      kind: Function
+      package: xpkg.crossplane.io/crossplane-contrib/function-patch-and-transform
+      version: ">=v0.11.0"
+    # - apiVersion: pkg.crossplane.io/v1
+    #   kind: Provider
+    #   package: xpkg.crossplane.io/crossplane-contrib/provider-kubernetes
+    #   version: ">=v1.4.1"

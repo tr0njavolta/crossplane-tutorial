@@ -21,7 +21,7 @@ echo "
 |kind CLI        |Yes                  |'https://kind.sigs.k8s.io/docs/user/quick-start/#installation'|
 |kubectl CLI     |Yes                  |'https://kubernetes.io/docs/tasks/tools/#kubectl'  |
 |crossplane CLI  |Yes                  |'https://docs.crossplane.io/latest/cli'            |
-|up CLI          |Yes                  |'https://docs.upbound.io/reference/cli'            |
+|Docker Hub account|Yes                |'https://hub.docker.com'                           |
 |yq CLI          |Yes                  |'https://github.com/mikefarah/yq#install'          |
 |Google Cloud account with admin permissions|If using Google Cloud|'https://cloud.google.com'|
 |Google Cloud CLI|If using Google Cloud|'https://cloud.google.com/sdk/docs/install'        |
@@ -62,7 +62,7 @@ kubectl create namespace a-team
 helm upgrade --install crossplane crossplane \
     --repo https://charts.crossplane.io/stable \
     --namespace crossplane-system --create-namespace \
-    --version 2.4.2 --wait
+    --version 2.4.3 --wait
 
 echo "## Which Hyperscaler do you want to use?" | gum format
 

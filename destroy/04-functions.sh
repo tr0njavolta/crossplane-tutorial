@@ -4,7 +4,7 @@ set -e
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
-	'Destruction of the Compositions chapter'
+	'Destruction of the Composition Functions chapter'
 
 gum confirm '
 Are you ready to start?
