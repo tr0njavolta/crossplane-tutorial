@@ -164,7 +164,7 @@ export PGHOST=$(kubectl \
     | base64 -d)
 
 kubectl run postgresql-client --rm -ti --restart='Never' \
-    --image docker.io/bitnami/postgresql:16 \
+    --image docker.io/library/postgres:16 \
     --env PGPASSWORD=$PGPASSWORD --env PGHOST=$PGHOST \
     --env PGUSER=$PGUSER --command -- sh
 
@@ -187,7 +187,7 @@ kubectl get pkgrev
 kubectl apply --filename compositions/sql-v5
 
 kubectl run postgresql-client --rm -ti --restart='Never' \
-    --image docker.io/bitnami/postgresql:16 \
+    --image docker.io/library/postgres:16 \
     --env PGPASSWORD=$PGPASSWORD --env PGHOST=$PGHOST \
     --env PGUSER=$PGUSER --command -- sh
 

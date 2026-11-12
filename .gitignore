@@ -9,3 +9,4 @@
 /kubeconfig.yaml
 .DS_Store
 book
+.agents/

@@ -77,7 +77,7 @@ export PGHOST=$(kubectl --namespace a-team \
     | base64 -d)
 
 kubectl run postgresql-client --rm -ti --restart='Never' \
-    --image docker.io/bitnami/postgresql:16 \
+    --image docker.io/library/postgres:16 \
     --env PGPASSWORD=$PGPASSWORD --env PGHOST=$PGHOST \
     --env PGUSER=$PGUSER --command -- sh
 
@@ -109,7 +109,7 @@ kubectl --namespace a-team apply \
 kubectl --namespace a-team get atlasschemas
 
 kubectl run postgresql-client --rm -ti --restart='Never' \
-    --image docker.io/bitnami/postgresql:16 \
+    --image docker.io/library/postgres:16 \
     --env PGPASSWORD=$PGPASSWORD --env PGHOST=$PGHOST \
     --env PGUSER=$PGUSER --command -- sh
 
